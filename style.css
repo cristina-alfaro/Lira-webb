@@ -1,0 +1,988 @@
+/* Variables de color de Lira */
+        :root {
+            --lira-primary: #8c52ff;
+            --lira-secondary: #bd7bff;
+            --lira-dark-accent: #6900dc;
+            --lira-white: #ffffff;
+            --lira-black: #000000;
+            --lira-light-bg: #eddff6;
+            --lira-text-dark: #1e293b;
+            --lira-text-muted: #475569;
+            --lira-gradient: linear-gradient(45deg, var(--lira-primary), var(--lira-secondary));
+        }
+
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--lira-white);
+            color: var(--lira-text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Utilidades de espaciado y flexbox (similares a Tailwind/Bootstrap) */
+        .py-5 { padding-top: 3rem; padding-bottom: 3rem; }
+        .py-6 { padding-top: 5rem; padding-bottom: 5rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .mt-5 { margin-top: 3rem; }
+        .d-flex { display: flex; }
+        .align-items-center { align-items: center; }
+        .justify-content-center { justify-content: center; }
+        .justify-content-between { justify-content: space-between; }
+        .flex-column { flex-direction: column; }
+        .text-center { text-align: center; }
+        .text-start { text-align: left; }
+        .text-white { color: var(--lira-white); }
+        .text-muted { color: var(--lira-text-muted); }
+        .fw-bold { font-weight: 700; }
+        .lead { font-size: 1.25rem; font-weight: 300; }
+        .display-1 { font-size: calc(1.625rem + 4.5vw); font-weight: 700; line-height: 1.2; }
+        @media (min-width: 992px) {
+            .display-1 { font-size: 4.5rem; }
+        }
+        .h2 { font-size: calc(1.325rem + 0.9vw); font-weight: 600; }
+        @media (min-width: 992px) {
+            .h2 { font-size: 2.5rem; }
+        }
+        .h3 { font-size: calc(1.3rem + 0.6vw); font-weight: 600; }
+        @media (min-width: 992px) {
+            .h3 { font-size: 2rem; }
+        }
+
+        /* Animaciones Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Aplicación de animaciones */
+        body {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .masthead .col-lg-6:first-child { /* Texto del masthead */
+            animation: slideInLeft 1s ease-out forwards;
+            opacity: 0; /* Inicialmente oculto */
+            animation-delay: 0.2s;
+        }
+
+        .masthead-device-mockup { /* Mockup del dispositivo */
+            animation: slideInRight 1s ease-out forwards;
+            opacity: 0; /* Inicialmente oculto */
+            animation-delay: 0.4s;
+        }
+
+        .feature-item,
+        .essence-card,
+        .pricing-card,
+        .team-member-card,
+        .app-screenshot {
+            animation: slideInUp 0.6s ease-out forwards;
+            opacity: 0; /* Inicialmente oculto */
+            /* Esto se manejará con JS para aparecer en scroll */
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px; /* Más redondeado */
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+        }
+          
+        .btn-primary {
+            background-color: var(--lira-primary);
+            color: var(--lira-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--lira-dark-accent);
+            transform: translateY(-3px) scale(1.02); /* Añadido scale */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline-light {
+            background-color: transparent;
+            color: var(--lira-white);
+            border: 2px solid var(--lira-white);
+        }
+
+        .btn-outline-light:hover {
+            background-color: var(--lira-white);
+            color: var(--lira-primary);
+            transform: translateY(-3px) scale(1.02); /* Añadido scale */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Navegación */
+        .navbar {
+            background-color: var(--lira-white);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: 'Newsreader', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--lira-primary);
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--lira-text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease; /* Transición para el color */
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--lira-primary);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 100%;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--lira-dark-accent); /* Cambio de color al pasar el ratón */
+        }
+
+        .navbar-toggler {
+            display: none; /* Ocultar por defecto en desktop */
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--lira-primary);
+            cursor: pointer;
+        }
+
+        /* Header / Masthead */
+        .masthead {
+            background: linear-gradient(135deg, var(--lira-light-bg) 0%, var(--lira-white) 100%);
+            padding-top: 0; /* Adjusted to 0 to allow content to go higher */
+            padding-bottom: 0; /* Adjusted to 0 to allow content to go higher */
+            min-height: 100vh; /* Ensures it takes full viewport height for centering */
+            display: flex;
+            align-items: center; /* Keeps content aligned vertically in the middle */
+        }
+
+        .masthead h1 {
+            color: var(--lira-dark-accent);
+            font-size: 5rem; /* Increased font size for impact */
+            margin-bottom: 20px;
+        }
+
+        .masthead p.lead {
+            color: var(--lira-text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .masthead-device-mockup {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px; /* Keep this as a minimum */
+            height: auto; /* Allow height to adjust based on content */
+            max-width: 400px; /* Revertido a un tamaño más pequeño */
+            margin: 80px auto 0 auto; /* Increased top margin to push it down further */
+        }
+
+        .masthead-device-mockup .device-wrapper {
+            max-width: 250px; /* Revertido a un tamaño más pequeño */
+            position: relative;
+            z-index: 2;
+            margin-left: 0;
+        }
+
+        .masthead-device-mockup .device {
+            width: 300px; /* Revertido a un tamaño más pequeño */
+            height: 600px; /* Revertido a un tamaño más pequeño */
+            position: relative;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .device {
+            position: relative;
+            width: 300px; /* Revertido a un tamaño más pequeño */
+            height: 600px; /* Revertido a un tamaño más pequeño */
+        }
+        .device .screen {
+            position: absolute;
+            /* Estos valores corresponden a las dimensiones originales del iPhoneX mockup (300x600) */
+            top: 52px; /* Valor fijo en píxeles */
+            left: 24px; /* Valor fijo en píxeles */
+            width: 252px; /* Valor fijo en píxeles */
+            height: 496px; /* Valor fijo en píxeles */
+            background: #000;
+            border-radius: 38px;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .device .screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"] {
+            position: relative;
+            width: 300px; /* Revertido a un tamaño más pequeño */
+            height: 600px; /* Revertido a un tamaño más pequeño */
+        }
+        .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"]::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("assets/img/portrait_black.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"] .button {
+            display: none; /* Oculta el botón físico del mockup si existe */
+        }
+        .device[data-device=iPhoneX][data-orientation=portrait][data-color=black] .screen {
+            /* Estos valores corresponden a las dimensiones originales del iPhoneX mockup (300x600) */
+            top: 52px;
+            left: 24px;
+            width: 252px;
+            height: 496px;
+        }
+
+        /* SVG shapes for background aesthetics */
+        .masthead-device-mockup .circle,
+        .masthead-device-mockup .shape-1,
+        .masthead-device-mockup .shape-2 {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none; /* Ensure shapes don't interfere with clicks */
+        }
+
+        .masthead-device-mockup .circle {
+            width: 450px;
+            height: 450px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+        }
+        #circleGradient stop.gradient-start-color { stop-color: var(--lira-primary); }
+        #circleGradient stop.gradient-end-color { stop-color: var(--lira-secondary); }
+
+        .masthead-device-mockup .shape-1 {
+            display: none; /* Oculta la forma 1 */
+        }
+
+        .masthead-device-mockup .shape-2 {
+            display: none; /* Oculta la forma 2 */
+        }
+
+        /* Quote/testimonial aside */
+        aside.bg-gradient-primary-to-secondary {
+            background: var(--lira-gradient);
+            color: var(--lira-white);
+            padding: 80px 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+            display: flex; /* Added flex for centering content vertically */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+        }
+
+        aside .h2 {
+            font-family: 'Newsreader', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0; /* Removed bottom margin as image is gone */
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background-color: var(--lira-white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(250px, 1fr)); /* Four columns, each min 250px, max 1fr */
+            gap: 30px; /* Reduced gap slightly for better fit */
+            margin-top: 50px;
+            justify-content: center; /* Center the grid items horizontally */
+            max-width: 1100px; /* Optional: limit width if items get too wide */
+            margin-left: auto; /* Center the grid container itself */
+            margin-right: auto; /* Center the grid container itself */
+        }
+
+        .feature-item {
+            text-align: center;
+            background-color: var(--lira-light-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item i {
+            font-size: 3.5rem;
+            color: var(--lira-primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-item h3 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 10px;
+        }
+
+        .feature-item p {
+            color: var(--lira-text-muted);
+        }
+
+        /* Essence Section */
+        .essence-section {
+            background-color: var(--lira-light-bg);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .essence-section h2 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 40px;
+        }
+
+        .essence-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .essence-card {
+            background-color: var(--lira-white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .essence-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .essence-card h3 {
+            color: var(--lira-primary);
+            margin-bottom: 15px;
+            font-family: 'Newsreader', serif;
+        }
+
+        .essence-card p {
+            color: var(--lira-text-muted);
+        }
+
+        /* App Demo Section (Gallery) */
+        .app-demo-section {
+            padding: 80px 0;
+            background-color: var(--lira-white);
+            text-align: center;
+        }
+
+        .app-demo-section h2 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 40px;
+        }
+
+        .app-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .app-screenshot {
+            background-color: var(--lira-light-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .app-screenshot:hover {
+            transform: scale(1.03);
+        }
+
+        .app-screenshot .device {
+            width: 100%; /* Make device fill the card width */
+            height: 350px; /* Match card height */
+            margin: 0; /* Remove default device margin */
+            border-radius: 15px; /* Ensure it matches the card */
+            box-shadow: none; /* Remove inner device shadow if card has one */
+        }
+        .app-screenshot .device .screen {
+            top: 0; /* Adjust screen position to fit the image */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px; /* Match device radius */
+        }
+        .app-screenshot .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"]::after {
+            background-size: 90%; /* Adjust frame size to fit better */
+            top: 5%; /* Fine-tune position */
+            left: 5%;
+            width: 90%;
+            height: 90%;
+        }
+        .app-screenshot .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"] .screen {
+            top: 10%; /* Adjust screen position for the image inside the frame */
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border-radius: 25px; /* Slightly less rounded for inner screen */
+        }
+
+
+        .app-screenshot img {
+            width: 100%;
+            height: 100%; /* Images should fill the screen area */
+            object-fit: cover;
+            display: block;
+            border-radius: 15px; 
+        }
+
+        .app-screenshot p {
+            padding: 15px;
+            font-size: 0.95rem;
+            color: var(--lira-text-dark);
+            background-color: var(--lira-white);
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: var(--lira-light-bg);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .pricing-section h2 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 40px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background-color: var(--lira-white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--lira-primary);
+            box-shadow: 0 8px 30px rgba(140, 82, 255, 0.2);
+        }
+
+        .pricing-card h3 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--lira-dark-accent);
+            margin-bottom: 10px;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--lira-text-muted);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .pricing-card ul li {
+            margin-bottom: 10px;
+            color: var(--lira-text-dark);
+        }
+
+        .pricing-card ul li i {
+            margin-right: 8px;
+        }
+
+        .pricing-card ul li .fa-check-circle {
+            color: #28a745; /* Green for checkmark */
+        }
+
+        .pricing-card ul li .fa-times-circle {
+            color: #dc3545; /* Red for X mark */
+        }
+
+        .pricing-card .btn {
+            width: 80%;
+            margin-top: auto; /* Empuja el botón hacia abajo */
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+            background-color: var(--lira-white);
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 40px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); /* Adjusted min-width for 5 members */
+            gap: 30px;
+            margin-top: 50px;
+            justify-content: center; /* Centra los elementos de la cuadrícula */
+            max-width: 1100px; /* Limita el ancho para que no se extienda demasiado */
+            margin-left: auto; /* Centra la cuadrícula en la página */
+            margin-right: auto; /* Centra la cuadrícula en la página */
+        }
+
+        @media (min-width: 1100px) { /* Adjust breakpoint to ensure 5 columns */
+            .team-grid {
+                grid-template-columns: repeat(5, 1fr); /* Force 5 columns on wider screens */
+            }
+        }
+
+        .team-member-card {
+            background-color: var(--lira-light-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid var(--lira-primary);
+            box-shadow: 0 0 0 5px rgba(140, 82, 255, 0.2);
+        }
+
+        .team-member-card h3 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+
+        .team-member-card p {
+            color: var(--lira-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--lira-white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .faq-section h2 {
+            font-family: 'Newsreader', serif;
+            color: var(--lira-dark-accent);
+            margin-bottom: 40px;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .faq-item {
+            background-color: var(--lira-light-bg);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            background-color: var(--lira-primary);
+            color: var(--lira-white);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: var(--lira-dark-accent);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 20px;
+            background-color: var(--lira-white);
+            color: var(--lira-text-dark);
+            display: none; /* Hidden by default, JavaScript will toggle this */
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Call to Action (CTA) Section - Final */
+        .cta-final-section {
+            background: var(--lira-gradient);
+            padding: 80px 0;
+            text-align: center;
+            color: var(--lira-white);
+        }
+
+        .cta-final-section h2 {
+            font-family: 'Newsreader', serif;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-final-section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--lira-black);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--lira-primary);
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--lira-white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--lira-primary);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-info p {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-info a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: var(--lira-primary);
+        }
+
+        /* Botón Volver Arriba */
+        #backToTopBtn {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Fijo en la pantalla */
+            bottom: 30px; /* 30px desde abajo */
+            right: 30px; /* 30px desde la derecha */
+            z-index: 99; /* Asegura que esté por encima de otros elementos */
+            border: none; /* Sin borde */
+            outline: none; /* Sin contorno */
+            background-color: var(--lira-primary); /* Color de fondo */
+            color: white; /* Color del texto/icono */
+            cursor: pointer; /* Cursor de puntero */
+            padding: 15px; /* Espaciado */
+            border-radius: 50%; /* Redondo */
+            font-size: 24px; /* Tamaño del icono */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #backToTopBtn:hover {
+            background-color: var(--lira-dark-accent); /* Color al pasar el ratón */
+            transform: translateY(-3px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) { /* Adjust for tablets and smaller desktops */
+            .features-grid {
+                grid-template-columns: repeat(2, minmax(250px, 1fr)); /* Two columns on tablets */
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Navegación móvil */
+            .navbar-nav {
+                display: none; /* Ocultar menú en móvil por defecto */
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--lira-white);
+                position: absolute;
+                top: 70px; /* Debajo del navbar */
+                left: 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                padding: 10px 0;
+            }
+
+            .navbar-nav.active {
+                display: flex; /* Mostrar cuando está activo */
+            }
+
+            .navbar-nav .nav-link {
+                padding: 15px 20px;
+                border-bottom: 1px solid var(--lira-light-bg);
+            }
+
+            .navbar-nav .nav-link:last-child {
+                border-bottom: none;
+            }
+
+            .navbar-toggler {
+                display: block; /* Mostrar botón de menú en móvil */
+            }
+
+            /* Encabezado (Masthead) */
+            .masthead .row {
+                flex-direction: column-reverse; /* Cambiar orden en móvil */
+                text-align: center;
+            }
+
+            .masthead .col-lg-6 {
+                margin-bottom: 40px;
+            }
+            .masthead h1 {
+                font-size: 2.5rem;
+            }
+            .masthead p.lead { /* Ajuste de fuente y margen para el párrafo principal */
+                font-size: 1rem; 
+                margin-bottom: 2rem;
+            }
+            .masthead .btn { /* Ajuste de margen para el botón */
+                margin-top: 2rem;
+            }
+            
+            /* Ocultar formas de fondo en pantallas pequeñas */
+            .masthead-device-mockup .circle,
+            .masthead-device-mockup .shape-1,
+            .masthead-device-mockup .shape-2 {
+                display: none;
+            }
+
+            /* Rejillas de secciones */
+            .features-grid,
+            .essence-card-grid,
+            .pricing-grid,
+            .team-grid,
+            .app-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .app-demo-action {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            /* Ajustes para las capturas de pantalla de la app dentro del mockup */
+            .app-screenshot .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"]::after {
+                background-size: 95%; /* Ajuste para que el marco llene mejor el espacio */
+                top: 2.5%; 
+                left: 2.5%;
+                width: 95%;
+                height: 95%;
+            }
+            .app-screenshot .device[data-device="iPhoneX"][data-orientation="portrait"][data-color="black"] .screen {
+                top: 15%; /* Posición de la imagen dentro del marco */
+                left: 15%;
+                width: 70%;
+                height: 70%;
+                border-radius: 20px; /* Redondeado ligeramente menor para la pantalla interna */
+            }
+
+            /* Lista de FAQ */
+            .faq-list {
+                padding: 0 10px;
+            }
+            .faq-question {
+                font-size: 1rem;
+                padding: 15px;
+            }
+            .faq-answer {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            /* Información de contacto en el footer */
+            .contact-info {
+                align-items: flex-start; /* Alinear a la izquierda en móvil */
+                padding-left: 20px; /* Añadir padding para mejor visualización */
+            }
+        }
